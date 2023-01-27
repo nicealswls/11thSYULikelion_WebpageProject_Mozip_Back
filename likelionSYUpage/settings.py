@@ -1,5 +1,8 @@
 from pathlib import Path
 import os
+import pymysql
+
+pymysql.install_as_MySQLdb() #RDS Mysql 연결
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -63,10 +66,24 @@ WSGI_APPLICATION = 'likelionSYUpage.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql', # engine: mysql
+        'NAME' : 'likelion11th', # DB Name
+        'USER' : 'likelion11th', # DB User
+        'PASSWORD' : 'likelion3636!', # Password
+        'HOST': 'likelion11thpage.cfivmtywflcn.us-east-1.rds.amazonaws.com', # 데이터베이스 엔드포인트
+        'PORT': '3306', # 데이터베이스 포트
+        'OPTIONS':{
+            'init_command' : "SET sql_mode='STRICT_TRANS_TABLES'"
+        }
     }
 }
 
